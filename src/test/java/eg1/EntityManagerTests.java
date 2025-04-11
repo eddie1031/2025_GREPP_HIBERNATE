@@ -115,6 +115,45 @@ public class EntityManagerTests {
 
         });
 
+        executeCommit(entityManager, () -> {
+
+            Member findMember = entityManager.find(Member.class, member.getId());
+            assertThat(findMember.getId()).isEqualTo(member.getId());
+
+            findMember.setName("ADMIN");
+        });
+//
+        executeCommit(entityManager, () -> {
+            Member findMember = entityManager.find(Member.class, member.getId());
+            assertThat(findMember.getName()).isEqualTo("ADMIN");
+
+            entityManager.detach(findMember);
+            findMember.setName("MEMBER");
+        });
+
+        executeCommit(entityManager, () -> {
+            Member findMember = entityManager.merge(member);
+            assertThat(findMember.getName()).isNotEqualTo("ADMIN");
+            assertThat(findMember.getName()).isEqualTo("MEMBER");
+        });
+
+    }
+
+    @Test
+    @DisplayName("Write-behind Test")
+    void write_behind_test() throws Exception {
+
+        executeCommit(entityManager, () -> {
+
+            Member member1 = genMember(genMemberName());
+            Member member2 = genMember(genMemberName());
+
+            entityManager.persist(member1);
+            entityManager.persist(member2);
+
+            log.info("아직 쿼리가 실행되지 않았습니다!");
+
+        });
 
     }
 
