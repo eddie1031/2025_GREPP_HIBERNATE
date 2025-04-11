@@ -13,6 +13,7 @@ import util.TestUtils;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static util.TestUtils.*;
 
 @Slf4j
 public class EntityManagerTests {
@@ -62,36 +63,60 @@ public class EntityManagerTests {
     @DisplayName("Save test")
     void save_test() throws Exception {
 
-        EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        try {
+//        EntityTransaction transaction = entityManager.getTransaction();
+//        transaction.begin();
+//        try {
+//
+//            // Transient
+//            Member member = genMember(genMemberName());
+//
+//            // Managed
+//            entityManager.persist(member);
+//
+//        } catch ( Exception e ) {
+//            transaction.rollback();
+//        } finally {
+//            transaction.commit();
+//        }
 
-            // Transient
+        executeCommit(entityManager, () -> {
             Member member = genMember(genMemberName());
-
-            // Managed
             entityManager.persist(member);
-
-        } catch ( Exception e ) {
-            transaction.rollback();
-        } finally {
-            transaction.commit();
-        }
-
-
-
+        });
 
     }
 
     private Member genMember(String memberName) {
         return Member.builder()
-                .id(1L)
+                .id(memberName)
                 .name(memberName)
                 .build();
     }
 
     private static String genMemberName() {
-        return "member" + TestUtils.genNumStr();
+        return "member" + genNumStr();
     }
+
+    @Test
+    @DisplayName("Select Test")
+    void select_test() throws Exception {
+
+        Member member = genMember(genMemberName());
+
+        executeCommit(entityManager, () -> {
+
+            entityManager.persist(member);
+            Member findMember = entityManager.find(Member.class, member.getId());
+
+            assertThat(findMember).isEqualTo(member);
+
+            log.info("member = {}", member);
+            log.info("findMember = {}", findMember);
+
+        });
+
+
+    }
+
 
 }

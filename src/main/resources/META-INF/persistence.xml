@@ -16,6 +16,8 @@
     </persistence-unit>
     <persistence-unit name="grepp-hibernate-exp1">
 
+        <class>io.eddie.domain.eg1.Member</class>
+
         <properties>
 <!--                 url, username, password       -->
 <!--            <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />-->
@@ -23,6 +25,12 @@
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/grepp_hibernate_test" />
             <property name="jakarta.persistence.jdbc.user" value="happy"/>
             <property name="jakarta.persistence.jdbc.password" value="day"/>
+
+            <property name="" value=""/>
+            <property name="" value=""/>
+            <property name="" value=""/>
+            <property name="" value=""/>
+
         </properties>
 
     </persistence-unit>
