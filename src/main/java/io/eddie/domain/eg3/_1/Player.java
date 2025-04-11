@@ -2,11 +2,13 @@ package io.eddie.domain.eg3._1;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
 @Entity
 @Table(name = "players")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Player {
 
     @Id
@@ -20,8 +22,13 @@ public class Player {
 //    @Column(name = "team_id")
 //    private Integer teamId;
 
+    @Setter
+    @JoinColumn(name = "team_id", nullable = false)
+//    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne
-    @JoinColumn(name = "team_id")
     private Team team;
 
+    public Player(String name) {
+        this.name = name;
+    }
 }

@@ -11,6 +11,8 @@
         <class>io.eddie.domain.eg2._3.Account</class>
         <class>io.eddie.domain.eg2._3.GymMemberShip</class>
 
+        <class>io.eddie.domain.eg4._1.Coffee</class>
+
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver" />
             <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:./test" />
@@ -34,8 +36,8 @@
         <class>io.eddie.domain.eg3._1.Team</class>
         <class>io.eddie.domain.eg3._1.Player</class>
 
-        <class>io.eddie.domain.eg3._3.Lecture</class>
-        <class>io.eddie.domain.eg3._3.Student</class>
+<!--        <class>io.eddie.domain.eg3._3.Lecture</class>-->
+<!--        <class>io.eddie.domain.eg3._3.Student</class>-->
 
         <properties>
 <!--            <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />-->
@@ -48,7 +50,7 @@
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
 
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+<!--            <property name="hibernate.hbm2ddl.auto" value="create"/>-->
         </properties>
 
     </persistence-unit>
